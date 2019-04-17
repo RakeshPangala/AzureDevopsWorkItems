@@ -1,0 +1,8 @@
+Manage Storage
+
+1. Create a managed disk from a specialized VHD as a OS disk or from a data VHD as data disk in same or different subscription.
+2. Restore a virtual machine from snapshots of OS and data disks. Create OS and data managed disks from respective snapshots and then create a new virtual machine by attaching managed disks
+3. Copy existing managed disk in the same subscription or different subscription
+4. Export/Copy managed snapshots as VHD to a storage account in different region with PowerShell
+5. Import a specialized (not generalized/sysprepped) VHD to a snapshot and then use the snapshot to create multiple identical managed disks in small amount of time
+6. Copy snapshot of a managed disk in same subscription or different subscription with PowerShell

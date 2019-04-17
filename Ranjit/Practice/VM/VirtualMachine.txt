@@ -1,0 +1,7 @@
+Create virtual machines
+
+Create a virtual machine with Docker enabled and start a container running NGINX
+Create a virtual machine and use the Azure Virtual Machine custom script extension to install WordPress
+Create an Azure Virtual Machine running Windows Server 2016
+Create a virtual machine from a snapshot of an OS disk
+Create a virtual machine from a snapshot by first creating a managed disk from snapshot and then attach the new managed disk as OS disk

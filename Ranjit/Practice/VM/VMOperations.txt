@@ -1,0 +1,12 @@
+Secure Virtual Machines
+
+1. Create an Azure Key Vault, encryption key, and service principal, then encrypt a VM
+Monitor a VM with Operations Management Suite
+
+2. Create a virtual machine, install the Operations Management Suite (OMS) agent, and enroll the VM with an OMS Workspace.
+3. Enable Diagnostic logs for the resources NSG, NIC to OMS Work Space.
+
+
+Virtual Machine Scale Sets
+
+1. Create a basic virtual machine scale set running Windows Server 2016. After executing the script, it should create virtual machine scale set and supporting resources (A resource group, virtual network, load balancer, and NAT rules are automatically created if they do not already exist )
