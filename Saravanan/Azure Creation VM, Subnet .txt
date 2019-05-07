@@ -1,0 +1,19 @@
+#Login to Azure Account 
+Login-AzureRmAccount
+
+#Create a Resource group
+New-AzureRmResourceGroup -Name SaravananRG -Location EastUS
+
+#creating VM for following parameters 
+New-AzureRmVm `
+    -ResourceGroupName "SaravananRG" `
+    -Name "SaravananVM" `
+    -Location "East US" `
+    -VirtualNetworkName "SaravananVnet" `
+    -SubnetName "SaravananSubnet" `
+    -SecurityGroupName "SaravananNetworkSecurityGroup" `
+    -PublicIpAddressName "SaravananPublicIpAddress" `
+    -OpenPorts 80,3389
+
+#conneting to VM
+    Get-AzPublicIpAddress -ResourceGroupName "SaravananRG" | Select "IpAddress"
