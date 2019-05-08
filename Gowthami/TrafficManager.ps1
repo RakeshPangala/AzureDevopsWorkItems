@@ -36,7 +36,7 @@ Set-AzureRmTrafficManagerProfile -TrafficManagerProfile $Tmprofile
 
 #------------Creating traffic manager profile having Routing Method as priority---------------------------------
 
-$TmprofilePri = New-AzureRmTrafficManagerProfile -Name AnnuTMPrio -ResourceGroupName $rgname -TrafficRoutingMethod Priority -RelativeDnsName anuDns -Ttl 30 -MonitorProtocol HTTPS -MonitorPort 22 -MonitorPath "/"
+$TmprofilePri = New-AzureRmTrafficManagerProfile -Name GoowthamiTMPrio -ResourceGroupName $rgname -TrafficRoutingMethod Priority -RelativeDnsName GowthamiDns -Ttl 30 -MonitorProtocol HTTPS -MonitorPort 22 -MonitorPath "/"
 
 
 #------------Adding endpoints in Traffic Manager Profile having endpoint location as East-Us------------------------------------
@@ -57,7 +57,7 @@ Set-AzureRmTrafficManagerProfile -TrafficManagerProfile $TmprofilePri
 
 #------------Creating traffic manager profile having Routing Method as Weight---------------------------------
 
-$TmprofileWeig = New-AzureRmTrafficManagerProfile -Name AnnuTMWeig -ResourceGroupName $rgname -TrafficRoutingMethod Weighted -RelativeDnsName anuudns -Ttl 30 -MonitorProtocol HTTP -MonitorPort 80 -MonitorPath "/"
+$TmprofileWeig = New-AzureRmTrafficManagerProfile -Name GowthamiTMWeig -ResourceGroupName $rgname -TrafficRoutingMethod Weighted -RelativeDnsName Gowthamidns -Ttl 30 -MonitorProtocol HTTP -MonitorPort 80 -MonitorPath "/"
 
 
 
