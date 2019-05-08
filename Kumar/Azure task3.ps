@@ -1,0 +1,40 @@
+﻿Login-AzureRmAccount
+#Set some parameters
+$ResourceGroupName='kumar2'
+$Location='South India'
+$VmName='kumar-VM1'
+$SnapshotName = 'kumarsnapshot'
+$imageName = 'kumarimage'
+
+
+#Creating Resource group-----------------
+New-AzureRmResourceGroup -Name $ResourceGroupName  -Location $Location
+
+#Creating VM
+$Vm=New-AzureRmVm -ResourceGroupName $ResourceGroupName -Location $Location -Name $VmName
+
+#Get the VM
+$vm = Get-AzureRmVm -ResourceGroupName $ResourceGroupName -Name $VmName
+
+#Create the snapshot configuration. For this example, the snapshot is of the OS disk
+$snapshot =  New-AzureRmSnapshotConfig -SourceUri $vm.StorageProfile.OsDisk.ManagedDisk.Id -Location $Location -CreateOption copy
+
+#Take the snapshot:
+
+New-AzureRmSnapshot -Snapshot $snapshot -SnapshotName $SnapshotName -ResourceGroupName $ResourceGroupName 
+
+
+Stop-AzureRmVM -ResourceGroupName $ResourceGroupName -Name $vmName -Force
+Set-AzureRmVm -ResourceGroupName $ResourceGroupName -Name $vmName -Generalized
+
+$vm = Get-AzureRmVM -Name $vmName -ResourceGroupName $ResourceGroupName
+
+$image = New-AzureRmImageConfig -Location $location -SourceVirtualMachineId $vm.Id
+
+New-AzureRmImage -Image $image -ImageName $imageName -ResourceGroupName $ResourceGroupName
+
+
+
+
+
+
