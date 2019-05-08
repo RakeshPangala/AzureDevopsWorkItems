@@ -1,0 +1,113 @@
+﻿
+ Connect-AzureRmAccount
+  New-AzureRmResourceGroup -Name 'kumar1' -location 'South India' 
+  $VN1=New-AzureRmVirtualNetwork -ResourceGroupName 'kumar1' -Location 'South India' -Name 'kumarVnet-1' -AddressPrefix "190.168.0.0/25"
+  $FrontendSubnetConfig1=Add-AzureRmVirtualNetworkSubnetConfig -Name Frontendsubnet -AddressPrefix 190.168.0.0/28 -VirtualNetwork $VN1
+  $BackendSubnetConfig1=Add-AzureRmVirtualNetworkSubnetConfig -Name Backendsubnet  -AddressPrefix 190.168.0.32/28 -VirtualNetwork $VN1
+  $GateWaySubnet=add-AzureRmVirtualNetworkSubnetConfig -Name Gatewaysubnet  -AddressPrefix 190.168.0.48/28 -VirtualNetwork $VN1
+  $VN1 | Set-AzureRmVirtualNetwork
+
+  $Gw1         = "VNet1GW"
+$GwIP1       = "VNet1GWIP"
+$GwIPConf1   = "gwipconf1"
+
+ 
+  $VN2=New-AzureRmVirtualNetwork -ResourceGroupName 'kumar1' -Location 'South India' -Name 'kumarVnet-2' -AddressPrefix "190.168.1.0/25"
+  $FrontendSubnetConfig2=Add-AzureRmVirtualNetworkSubnetConfig -Name Frontendsubnet -AddressPrefix 190.168.1.0/28 -VirtualNetwork $VN2
+  $BackendSubnetConfig2=Add-AzureRmVirtualNetworkSubnetConfig -Name Backendsubnet  -AddressPrefix 190.168.1.32/28 -VirtualNetwork $VN2
+  $GateWaySubnet=add-AzureRmVirtualNetworkSubnetConfig -Name Gatewaysubnet  -AddressPrefix 190.168.1.48/28 -VirtualNetwork $VN2
+  $VN2 | Set-AzureRmVirtualNetwork
+
+
+  $VN3=New-AzureRmVirtualNetwork -ResourceGroupName 'kumar1' -Location 'South India' -Name 'kumarVnet-3' -AddressPrefix "190.168.2.0/25"
+  $FrontendSubnetConfig3=Add-AzureRmVirtualNetworkSubnetConfig -Name Frontendsubnet -AddressPrefix 190.168.2.0/28 -VirtualNetwork $VN3
+  $BackendSubnetConfig3=Add-AzureRmVirtualNetworkSubnetConfig -Name Backendsubnet  -AddressPrefix 190.168.2.32/28 -VirtualNetwork $VN3
+  $GateWaySubnet=add-AzureRmVirtualNetworkSubnetConfig -Name Gatewaysubnet  -AddressPrefix 190.168.2.48/28 -VirtualNetwork $VN3
+  $VN3 | Set-AzureRmVirtualNetwork
+
+
+$Gw1         = "VNet1GW"
+$GwIP1       = "VNet1GWIP"
+$GwIPConf1   = "gwipconf1"
+  
+$gwpip1 = New-AzureRmPublicIpAddress -Name 'kumarpip' -ResourceGroupName 'kumar1' -Location 'South India' -AllocationMethod Dynamic
+$Gwsubnet1 = Get-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $VN1
+$gwipconf1 = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GwIPConf1 -Subnet $Gwsubnet1 -PublicIpAddress $gwpip1
+
+$gw=New-AzVirtualNetworkGateway -Name $Gw1 -ResourceGroupName 'kumar1' -Location 'South India' -IpConfigurations $gwipconf1 -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1
+
+Set-VpnConnection -Name Vnet1
+
+$Gw2         = "VNet2GW"
+$GwIP2       = "VNet2GWIP"
+$GwIPConf2   = "gwipconf2"
+  
+$gwpip2 = New-AzureRmPublicIpAddress -Name 'kumarpip' -ResourceGroupName 'kumar1' -Location 'South India' -AllocationMethod Dynamic
+$Gwsubnet2 = Get-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $VN2
+$gwipconf2 = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GwIPConf2 -Subnet $Gwsubnet2 -PublicIpAddress $gwpip2
+
+
+
+
+$Gw3         = "VNet3GW"
+$GwIP3       = "VNet3GWIP"
+$GwIPConf3   = "gwipconf3"
+  
+$gwpip3 = New-AzureRmPublicIpAddress -Name 'kumarpip' -ResourceGroupName 'kumar1' -Location 'South India' -AllocationMethod Dynamic
+$Gwsubnet3 = Get-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $VN3
+$gwipconf3 = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GwIPConf3 -Subnet $Gwsubnet3 -PublicIpAddress $gwpip3
+
+
+$Gw1         = "VNet1GW"
+$GwIP1       = "VNet1GWIP"
+$GwIPConf1   = "gwipconf1"
+
+
+$gwpip    = New-AzPublicIpAddress -Name Gw1PublicIP -ResourceGroupName 'kumar1' -Location 'South India' -AllocationMethod Dynamic
+$subnetip   = Get-AzVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -VirtualNetwork $VN1
+$gwipconf = New-AzVirtualNetworkGatewayIpConfig -Name $GwIPConf1 -Subnet $subnetip -PublicIpAddress $gwpip1
+
+
+$Gw1=New-AzVirtualNetworkGateway -Name $Gw1 -ResourceGroupName 'kumar1' $Rg -Location 'South India' -IpConfigurations $gwipconf -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1
+
+$Gw2         = "VNet2GW"
+$GwIP2       = "VNet2GWIP"
+$GwIPConf2   = "gwipconf2"
+
+
+$gwpip2    = New-AzPublicIpAddress -Name Gw2PublicIP -ResourceGroupName 'kumar1' -Location 'South India' -AllocationMethod Dynamic
+$subnetip2   = Get-AzVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -VirtualNetwork $VN2
+$gwipconf2 = New-AzVirtualNetworkGatewayIpConfig -Name $GwIPConf2 -Subnet $subnetip2 -PublicIpAddress $gwpip2
+
+
+$Gw1=New-AzVirtualNetworkGateway -Name $Gw2 -ResourceGroupName 'kumar' -Location 'South India' -IpConfigurations $gwipconf2 -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1 
+
+#$Gw1         = "VNet1GW"
+#$GwIP1       = "VNet1GWIP"
+#$GwIPConf1   = "gwipconf1"
+
+
+$vnet1gw = Get-AzVirtualNetworkGateway -Name $Gw1 -ResourceGroupName $Rg
+
+#$Gw2         = "VNet2GW"
+#$GwIP2       = "VNet2GWIP"
+#$GwIPConf2   = "gwipconf2"
+
+$vnet2gw = Get-AzVirtualNetworkGateway -Name $Gw2 -ResourceGroupName $Rg
+
+
+$Connection="Vnet1-Vnet2"
+
+$gwconnection=New-AzVirtualNetworkGatewayConnection -Name $Connection -ResourceGroupName $Rg -VirtualNetworkGateway1 $vnet1gw -VirtualNetworkGateway2 $vnet2gw -Location $Location -ConnectionType Vnet2Vnet -SharedKey '3761'
+
+$Connection="Vnet2-Vnet1"
+
+$gwconnection=New-AzVirtualNetworkGatewayConnection -Name $Connection -ResourceGroupName $Rg -VirtualNetworkGateway1 $vnet2gw -VirtualNetworkGateway2 $vnet1gw -Location $Location -ConnectionType Vnet2Vnet -SharedKey '3761'
+
+
+Add-AzVirtualNetworkPeering -Name 'myVnet1ToMyVnet2' -VirtualNetwork $VN2 -RemoteVirtualNetworkId $VN3.Id -AllowGatewayTransit
+
+Add-AzVirtualNetworkPeering -Name 'myVnet2ToMyVnet1' -VirtualNetwork $VN3 -RemoteVirtualNetworkId $VN2.Id -UseRemoteGateways
+
+
+ 
