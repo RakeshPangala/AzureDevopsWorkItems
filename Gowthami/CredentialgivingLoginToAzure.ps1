@@ -1,8 +1,8 @@
 ﻿
 
 
-$User = "quadrantit@hotmail.com"
-$PWord = ConvertTo-SecureString -String "Quadrant@8484" -AsPlainText -Force
+$User = "xxxxxxxx"
+$PWord = ConvertTo-SecureString -String "xxxxx" -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 Login-AzureRmAccount -Credential $Credential
 #Login-AzureRmAccount -Credential $Credential -TenantId "Noted Tenant ID"
