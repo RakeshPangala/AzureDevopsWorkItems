@@ -1,9 +1,8 @@
 ﻿Set-ExecutionPolicy RemoteSigned
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 Get-ExecutionPolicy
-Import-Module AzureRm
-Install-Module AzureRm
-Login-AzureRmAccount
+
+Login-AzAccount
 
 
 
