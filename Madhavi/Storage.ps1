@@ -1,9 +1,9 @@
 ﻿
 Login-AzureRmAccount
 
-New-AzureRmResourceGroup -Name MadhuRG -Location "East US"
+New-AzureRmResourceGroup -Name MadhuRG -Location eastus
 
-$storageAcc=New-AzureRmStorageAccount -ResourceGroupName MadhuRG -Name madhustorage958acc -SkuName Standard_LRS -Location "East US" -AccessTier Hot -Kind BlobStorage 
+$storageAcc=New-AzureRmStorageAccount -ResourceGroupName MadhuRG -Name madhustorage958acc -SkuName Standard_LRS -Location eastus -AccessTier Hot -Kind BlobStorage 
 
 $ctx=$storageAcc.Context
 
