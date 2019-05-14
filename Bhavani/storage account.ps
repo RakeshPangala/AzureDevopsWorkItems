@@ -1,0 +1,20 @@
+﻿Install-Module -name az -AllowClobber
+Connect-AzAccount
+
+#Crreating Resource group
+New-AzResourceGroup -Name BhavaniRG1 -Location southindia
+
+#Creating Storage Acoount
+$storageacccount = New-AzStorageAccount -ResourceGroupName BhavaniRG1 -Name bhavanisaa -Location southindia -SkuName Standard_LRS 
+$ctx = $storageaccount.Context
+
+#Create blob container
+New-AzStorageContainer -Name Container2 -Permission blob -Context $ctx
+
+ # upload a file
+set-AzStorageblobcontent -File "C:\Users\Day Team.L-41\Desktop" -Container container2 -Blob "Image001.jpg" -Context $ctx 
+
+
+
+
+  
