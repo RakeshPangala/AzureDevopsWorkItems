@@ -1,4 +1,4 @@
-$mylist=1,2,3,4,5,6
+$mylist=11,24,33,64,15,46
 
 
 $first=$second=0
