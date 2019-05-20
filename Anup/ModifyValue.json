@@ -1,0 +1,24 @@
+{
+    "update":  [
+                   {
+                       "Name":  "Modify",
+                       "Version":  "2.1",
+                       "Abbrevation":  "M"
+                   },
+                   {
+                       "Name":  "WebConfigFile",
+                       "Version":  "6.0",
+                       "Abbrevation":  "WF"
+                   },
+                   {
+                       "Name":  "ChangeConnectionString",
+                       "Version":  "2.3",
+                       "Abbrevation":  "CCS"
+                   },
+                   {
+                       "Name":  "Session",
+                       "Version":  "2.5",
+                       "Abbrevation":  "S"
+                   }
+               ]
+}
