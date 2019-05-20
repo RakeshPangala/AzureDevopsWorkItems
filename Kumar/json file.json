@@ -1,0 +1,57 @@
+
+#Before Modifyimg Json file
+
+{
+    "Details":  [
+                   {
+                       "Name":  "Stephen",
+                       "Age":  ""
+                   },
+                   {
+                       "Name":  "Tom",
+                       "Age":  "40"
+                   },
+		   {
+                       "Name":  "Sai",
+                       "Age":  "22"
+                   },
+                   {
+                       "Name":  "Ram",
+                       "Age":  "null"
+                   }
+
+              ]
+}
+
+
+
+#Command for updating Json file
+
+$a = Get-Content 'C:\Users\kumar\Desktop\kumar\azure tasks\kumar.json' -raw | ConvertFrom-Json
+$a.Details| % {if($_.name -eq 'Ram'){$_.Age=40}}
+$a | ConvertTo-Json -depth 32| set-content 'C:\Users\kumar\Desktop\kumar\azure tasks\kumar1.json'
+
+
+
+#After Modifyimg Json file
+
+{
+    "Details":  [
+                    {
+                        "Name":  "Stephen",
+                        "Age":  ""
+                    },
+                    {
+                        "Name":  "Tom",
+                        "Age":  "40"
+                    },
+                    {
+                        "Name":  "Sai",
+                        "Age":  "22"
+                    },
+                    {
+                        "Name":  "Ram",
+                        "Age":  40
+                    }
+                ]
+}
