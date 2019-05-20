@@ -1,0 +1,73 @@
+    
+{
+
+    "update": [
+
+        {
+
+            "Name": "Saravanan",        
+
+            "Version": "2.1"
+
+        },
+
+        {
+
+            "Name": "Shanmugam",        
+
+            "Version": "2.1"
+
+        }   
+
+    ]
+
+}
+
+
+
+
+$a = Get-Content 'D:\temp\new.json' -raw | ConvertFrom-Json
+
+$a.update | % {if($_.name -eq 'new'){$_.version=3.0}}
+
+$a | ConvertTo-Json -depth 32| set-content 'D:\temp\mytest.json'
+
+
+
+{
+
+    "update":  [
+
+                   {
+
+                       "Name":  "Earth",
+
+                       "Version":  3
+
+                   },
+
+                   {
+
+                       "Name":  "NewEarth",
+
+                       "Version":  "2.1"
+
+                   }
+
+               ]
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
