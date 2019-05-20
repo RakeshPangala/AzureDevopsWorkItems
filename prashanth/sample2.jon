@@ -1,0 +1,63 @@
+{
+   "fruit": [
+			{
+		 "kind": "apple",
+		 "count": 24,
+		 "fresh": true,
+		 
+			},
+		{
+		 "kind": "pear",
+		 "count": 18,
+		 "fresh": false,
+		
+		}
+		{
+		 "kind": "banana",
+		 "count": 24,
+		 "fresh": true,
+		
+		}
+		{
+		 "kind": "mango",
+		 "count": 36,
+		 "fresh": false,
+		
+		}
+    ],
+   
+}
+
+$a = Get-Content 'c:\temp\kpsample.json' 
+$a.update | % {if($_.kind -eq 'apple'){$_.count=35}
+$a | ConvertTo-Json -depth 32| set-content 'c:\temp\kpsample.json'
+
+{
+   "fruit": [
+			{
+		 "kind": "apple",
+		 "count": 24,
+		 "fresh": true,
+		 
+			},
+		{
+		 "kind": "pear",
+		 "count": 18,
+		 "fresh": false,
+		
+		}
+		{
+		 "kind": "banana",
+		 "count": 24,
+		 "fresh": true,
+		
+		}
+		{
+		 "kind": "mango",
+		 "count": 36,
+		 "fresh": false,
+		
+		}
+    ],
+   
+}
