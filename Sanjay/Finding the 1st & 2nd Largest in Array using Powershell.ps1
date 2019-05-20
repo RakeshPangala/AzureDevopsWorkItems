@@ -8,10 +8,10 @@ $i=0
 for($i=0;$i-le $mylist.Count;$i++)
 {
 
-if($mylist[$i] -gt $1st)
+if($mylist[$i] -gt $first)
 
 {
-$second=$1st
+$second=$first
 
 $first=$mylist[$i]
 
