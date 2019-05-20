@@ -10,7 +10,7 @@ $b
 $c=$a|Where-Object |Select-Object -Property "maximum" 
 $c
 
-$d=$array.slice($array.indexOf(max), 1); // remove max from the array
+$d=$array.slice($array.indexOf(max), 1); # remove max from the array
 $d
-$output=Math.max.apply(null, arr); // get the 2nd max
+$output=Math.max.apply(null, arr); #get the 2nd max
 $output
