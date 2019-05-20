@@ -1,0 +1,3 @@
+﻿$a = Get-Content 'C:\Users\kumar\Desktop\kumar\azure tasks\kumar.json' -raw | ConvertFrom-Json
+$a.Details| % {if($_.name -eq 'Ram'){$_.Age=40}}
+$a | ConvertTo-Json -depth 32| set-content 'C:\Users\kumar\Desktop\kumar\azure tasks\kumar1.json'
