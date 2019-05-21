@@ -1,16 +1,22 @@
-﻿$array=@(3,6,5,1,7,9,1)
+﻿$array1=@(3,6,5,1,7,9,1)
 $array
 
-$a=$array|Measure-Object -Maximum
-$a
-$b=$a|Where-Object |Select-Object -Property "maximum" -ExpandProperty Maximum
-$b
+$a1=$array1|Measure-Object -Maximum
 
+$a1
 
-$c=$a|Where-Object |Select-Object -Property "maximum" 
-$c
+$b1=$a1|Where-Object |Select-Object -Property "maximum" -ExpandProperty Maximum
 
-$d=$array.slice($array.indexOf(max), 1); # remove max from the array
-$d
-$output=Math.max.apply(null, arr); #get the 2nd max
-$output
+$b1
+
+$skip=$true
+$array2 = $array1 | ForEach-Object { if (($_ -eq $b1) -and $skip) { $skip=$false } else { $_ } }
+
+$array2
+
+$a2=$array2|Measure-Object -Maximum
+$a2
+$b2=$a2|Where-Object |Select-Object -Property "maximum" -ExpandProperty Maximum
+
+$b2
+
