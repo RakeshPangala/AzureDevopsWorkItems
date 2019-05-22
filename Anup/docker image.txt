@@ -1,0 +1,99 @@
+
+C:\Users\v-anugho>cd desktop
+
+C:\Users\v-anugho\Desktop>mkdir docker
+
+C:\Users\v-anugho\Desktop>cd docker
+
+C:\Users\v-anugho\Desktop\docker>touch dockerfile
+
+C:\Users\v-anugho\Desktop\docker>docker login
+Authenticating with existing credentials...
+Login Succeeded
+
+C:\Users\v-anugho\Desktop\docker>vim dockerfile
+
+C:\Users\v-anugho\Desktop\docker>cat dockerfile
+FROM ubuntu
+MAINTAINER ghorpadeanup pal ghorpadeanup@gmail.com
+RUN apt-get update
+CMD ["echo","hellooo"]
+
+
+C:\Users\v-anugho\Desktop\docker>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        4 months ago        1.84kB
+
+C:\Users\v-anugho\Desktop\docker>docker build -t anupimage1:1.0 .
+Sending build context to Docker daemon  2.048kB
+Step 1/4 : FROM ubuntu
+latest: Pulling from library/ubuntu
+6abc03819f3e: Pull complete
+05731e63f211: Pull complete
+0bd67c50d6be: Pull complete
+Digest: sha256:f08638ec7ddc90065187e7eabdfac3c96e5ff0f6b2f1762cf31a4f49b53000a5
+Status: Downloaded newer image for ubuntu:latest
+ ---> 7698f282e524
+Step 2/4 : MAINTAINER ghorpadeanup pal ghorpadeanup@gmail.com
+ ---> Running in 3dfa0ab247ad
+Removing intermediate container 3dfa0ab247ad
+ ---> 1eb0f4cc6c6d
+Step 3/4 : RUN apt-get update
+ ---> Running in aa3f78531abf
+Get:1 http://archive.ubuntu.com/ubuntu bionic InRelease [242 kB]
+Get:2 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+Get:3 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [447 kB]
+Get:4 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:5 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
+Get:6 http://archive.ubuntu.com/ubuntu bionic/universe amd64 Packages [11.3 MB]
+Get:7 http://security.ubuntu.com/ubuntu bionic-security/multiverse amd64 Packages [4168 B]
+Get:8 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [308 kB]
+Get:9 http://security.ubuntu.com/ubuntu bionic-security/restricted amd64 Packages [5436 B]
+Get:10 http://archive.ubuntu.com/ubuntu bionic/multiverse amd64 Packages [186 kB]
+Get:11 http://archive.ubuntu.com/ubuntu bionic/main amd64 Packages [1344 kB]
+Get:12 http://archive.ubuntu.com/ubuntu bionic/restricted amd64 Packages [13.5 kB]
+Get:13 http://archive.ubuntu.com/ubuntu bionic-updates/multiverse amd64 Packages [7236 B]
+Get:14 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1199 kB]
+Get:15 http://archive.ubuntu.com/ubuntu bionic-updates/restricted amd64 Packages [10.8 kB]
+Get:16 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [803 kB]
+Get:17 http://archive.ubuntu.com/ubuntu bionic-backports/main amd64 Packages [942 B]
+Get:18 http://archive.ubuntu.com/ubuntu bionic-backports/universe amd64 Packages [3671 B]
+Fetched 16.2 MB in 35s (459 kB/s)
+Reading package lists...
+Removing intermediate container aa3f78531abf
+ ---> da33109ab89b
+Step 4/4 : CMD ["echo","hellooo"]
+ ---> Running in eef95a0bfc4c
+Removing intermediate container eef95a0bfc4c
+ ---> c1b376a862c0
+Successfully built c1b376a862c0
+Successfully tagged anupimage1:1.0
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\v-anugho\Desktop\docker>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+anupimage1          1.0                 c1b376a862c0        42 seconds ago      95.5MB
+ubuntu              latest              7698f282e524        6 days ago          69.9MB
+hello-world         latest              fce289e99eb9        4 months ago        1.84kB
+
+C:\Users\v-anugho\Desktop\docker>docker run c1b376a862c0
+hellooo
+
+C:\Users\v-anugho\Desktop\docker>docker push anupimage1
+The push refers to repository [docker.io/library/anupimage1]
+7b943dc6b9a0: Preparing
+8d267010480f: Preparing
+270f934787ed: Preparing
+02571d034293: Preparing
+denied: requested access to the resource is denied
+
+C:\Users\v-anugho\Desktop\docker>
+C:\Users\v-anugho\Desktop\docker>docker save anupimage1
+cowardly refusing to save to a terminal. Use the -o flag or redirect
+
+C:\Users\v-anugho\Desktop\docker>docker save anupimage1 >anupimage1.tar
+
+C:\Users\v-anugho\Desktop\docker>docker load --input anupimage1.tar
+Loaded image: anupimage1:1.0
+
+C:\Users\v-anugho\Desktop\docker>
