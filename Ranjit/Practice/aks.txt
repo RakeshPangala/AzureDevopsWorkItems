@@ -1,0 +1,51 @@
+
+
+az account set -s "Microsoft Azure"
+
+AKS Requires
+Microsoft Container Service
+Microsoft.compute
+Microsoft.Network
+Microsoft.Storage
+
+az provider register -n Microsoft.compute
+
+az provider list -o table
+
+create resource aks to use
+az group create -n kubeclust-aks --location eastus
+
+get aks supported version number
+az aks get-versions --location eastus --output table
+
+create cluster in
+az aks create --resource-group kubeclust1-aks --name kubeclust-aks --node-count 1 --generate-ssh-keys --kubernetes-version 1.9.10 --node-vm-size=Standard_B2s
+
+az aks get-credentials --resource-group kubeclust-aks --name kubeclust-aks
+
+kubectl get nodes
+
+kubectl cluster-info
+______
+
+mkdir ~/clouddrive/azure-voting
+
+
+
+cd clouddrive/azure-voting/
+curl -O https://raw.githubusercontent.com/azure-samples/azure-voting-app-redis/master/azure-vote-all-in-one-redis.yaml
+
+Apply the file to create kubernetes resources
+kubectl create -f azure-vote-all-in-one-redis.yaml
+
+check whether pods created
+kubectl get pods
+
+check whether kubernetes service is created
+kubectl get svc
+
+to watch for changes
+kubectl get svc -w
+
+
+
