@@ -1,0 +1,30 @@
+﻿Login-AzAccount
+# Resource name for your resources  
+$resourcegroupname = "BhavaniRG"  
+$location = "Southindia"  
+# The logical server name: Use a random value or replace with your own (do not capitalize)  
+$servername = "server-$(Get-Random)"  
+# Set login and password for your database  
+# The login information for the server  
+$adminlogin = "Bhavani"  
+$password = "qrserver@3"  
+# The ip address range that you want to allow to access your server   
+$startip = "192.68.0.5"  
+$endip = "192.68.0.5"  
+# The database name  
+$databasename = "qrDB" 
+ 
+ #Creating a Resource Group
+
+New-AzResourceGroup -Name $resourcegroupname -Location $location
+
+#creating Azure SQL Database Server
+
+New-AzSqlServer -ResourceGroupName $resourcegroupname -ServerName $servername -Location $location 
+-SqlAdministratorCredentials $(New-Object -TypeName System.Management.Automation.PSCredential)
+-ArgumentList $adminlogin, $(ConvertTo-SecureString -String $password -AsPlainText -Force)
+#Creating Database
+$database = New-AzSqlDatabase -DatabaseName $databasename -ResourceGroupName "$resourcegroupname" -ServerName $servername -SampleName AdventureWorksLT 
+
+#Creating firewall and giving rules
+$serverfirewall = New-AzSqlServerFirewallRule -FirewallRuleName "Rule1" -ResourceGroupName "$resourcegroupname" -StartIpAddress "192.68.0.5" -EndIpAddress "192.68.0.5" -ServerName $servername 
